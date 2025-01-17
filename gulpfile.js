@@ -7,12 +7,14 @@ const fs = require("fs");
 const sourceMaps = require("gulp-sourcemaps");
 const plumber = require("gulp-plumber");
 const notify = require("gulp-notify");
+const webpack = require("webpack-stream");
+const babel = require("gulp-babel");
 
 const notificationConfig = (title) => {
   return {
     errorHandler: notify.onError({
       title: `${title}`,
-      message: `${title} error <%= error.message %>`,
+      message: `error <%= error.message %>`,
       sound: false,
     }),
   };
@@ -48,6 +50,26 @@ gulp.task("images", () => {
   return gulp.src("./src/img/**/*").pipe(gulp.dest("./dist/img/"));
 });
 
+// NOTE: copy fonts to dist
+gulp.task("fonts", () => {
+  return gulp.src("./src/fonts/**/*").pipe(gulp.dest("./dist/fonts/"));
+});
+
+// NOTE: copy files to dist
+gulp.task("files", () => {
+  return gulp.src("./src/files/**/*").pipe(gulp.dest("./dist/files/"));
+});
+
+// NOTE: js files
+gulp.task("js", () => {
+  return gulp
+    .src("./src/js/*.js")
+    .pipe(plumber(notificationConfig("JavaScript")))
+    .pipe(babel())
+    .pipe(webpack(require("./webpack.config.js")))
+    .pipe(gulp.dest("./dist/js"));
+});
+
 // NOTE: starts server
 gulp.task("server", () => {
   return gulp.src("./dist/").pipe(
@@ -71,6 +93,9 @@ gulp.task("watch", () => {
   gulp.watch("./src/styles/**/*.scss", gulp.parallel("sass"));
   gulp.watch("./src/**/*.html", gulp.parallel("html"));
   gulp.watch("./src/img/**/*", gulp.parallel("images"));
+  gulp.watch("./src/fonts/**/*", gulp.parallel("fonts"));
+  gulp.watch("./src/files/**/*", gulp.parallel("files"));
+  gulp.watch("./src/js/**/*.js", gulp.parallel("js"));
 });
 
 // NOTE: default gulp task to watch every change
@@ -78,7 +103,7 @@ gulp.task(
   "default",
   gulp.series(
     "clean",
-    gulp.parallel("html", "sass", "images"),
+    gulp.parallel("html", "sass", "images", "fonts", "files", "js"),
     gulp.parallel("server", "watch"),
   ),
 );
