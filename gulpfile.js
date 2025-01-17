@@ -5,6 +5,8 @@ const serverReload = require("gulp-server-livereload");
 const clean = require("gulp-clean");
 const fs = require("fs");
 const sourceMaps = require("gulp-sourcemaps");
+const plumber = require("gulp-plumber");
+const notify = require("gulp-notify");
 
 // NOTE: include html files into main html
 gulp.task("html", () => {
@@ -23,6 +25,15 @@ gulp.task("html", () => {
 gulp.task("sass", () => {
   return gulp
     .src("./src/styles/*.scss")
+    .pipe(
+      plumber({
+        errorHandler: notify.onError({
+          title: "SASS/SCSS",
+          message: "Styles Error <%= error.message %>",
+          sound: false,
+        }),
+      }),
+    )
     .pipe(sourceMaps.init())
     .pipe(sass().on("error", sass.logError))
     .pipe(sourceMaps.write())
@@ -59,6 +70,7 @@ gulp.task("watch", () => {
   gulp.watch("./src/img/**/*", gulp.parallel("images"));
 });
 
+// NOTE: default gulp task to watch every change
 gulp.task(
   "default",
   gulp.series(
