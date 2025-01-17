@@ -48,3 +48,19 @@ gulp.task("clean", (callback) => {
   }
   callback();
 });
+
+// NOTE: watch files
+gulp.task("watch", () => {
+  gulp.watch("./src/styles/**/*.scss", gulp.parallel("sass"));
+  gulp.watch("./src/**/*.html", gulp.parallel("html"));
+  gulp.watch("./src/img/**/*", gulp.parallel("images"));
+});
+
+gulp.task(
+  "default",
+  gulp.series(
+    "clean",
+    gulp.parallel("html", "sass", "images"),
+    gulp.parallel("server", "watch"),
+  ),
+);

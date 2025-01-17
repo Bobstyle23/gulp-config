@@ -9,5 +9,8 @@
     "gulp-server-livereload": "^1.9.2",
     "gulp-sourcemaps": "^3.0.0",
     "sass": "^1.83.4"
+  },
+  "dependencies": {
+    "@bobstyle23/common-styles": "^1.0.15"
   }
 }

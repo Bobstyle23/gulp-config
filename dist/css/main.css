@@ -1,9 +1,118 @@
+.btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  width: 21.6rem;
+  height: 6rem;
+  border: none;
+  border-radius: 0.4rem;
+}
+
+/* NOTE: breakpoints */
+/* NOTE: colors */
+/* NOTE: background-colors */
+/* NOTE: line-colors */
+/* NOTE: icon-color */
+/* NOTE: background gradient */
+/* NOTE: box shadows */
+/* NOTE: box shadows */
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Noto Sans", sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  background-image: linear-gradient(to bottom right, #f9fafb, #d2d6db);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:focus {
+  text-decoration: none;
+  color: #000;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button {
+  border: none;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+.btn__primary {
+  background-color: #4338ca;
+  color: #fff;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+.btn__primary:hover, .btn__primary:focus {
+  background-color: #3730a3;
+}
+.btn__primary:focus {
+  box-shadow: 0 0 0 4px rgba(68, 76, 231, 0.12);
+}
+.btn__primary--disabled {
+  background-color: #f5f5f5;
+  color: #a3a3a3;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+.btn__secondary {
+  background-color: #fff;
+  color: #171717;
+  box-shadow: inset 0 0 0 0.5px #e5e5e5, 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+.btn__secondary:hover, .btn__secondary:focus {
+  color: #0a0a0a;
+  background-color: #fafafa;
+}
+.btn__secondary:hover {
+  box-shadow: inset 0 0 0 1px solid #e5e5e5;
+}
+.btn__secondary:focus {
+  box-shadow: 0 0 0 4px rgba(68, 76, 231, 0.12);
+}
+.btn__secondary--disabled {
+  background-color: #f5f5f5;
+  color: #a3a3a3;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
 .team {
   width: 100%;
   height: 200px;
   background-color: orange;
   color: blue;
-  padding: 100px;
+  padding: 100px 0;
 }
 
 .features {
