@@ -8,10 +8,21 @@ const sourceMaps = require("gulp-sourcemaps");
 const plumber = require("gulp-plumber");
 const notify = require("gulp-notify");
 
+const notificationConfig = (title) => {
+  return {
+    errorHandler: notify.onError({
+      title: `${title}`,
+      message: `${title} error <%= error.message %>`,
+      sound: false,
+    }),
+  };
+};
+
 // NOTE: include html files into main html
 gulp.task("html", () => {
   return gulp
     .src("./src/*.html")
+    .pipe(plumber(notificationConfig("HTML")))
     .pipe(
       fileInclude({
         prefix: "@@",
@@ -25,15 +36,7 @@ gulp.task("html", () => {
 gulp.task("sass", () => {
   return gulp
     .src("./src/styles/*.scss")
-    .pipe(
-      plumber({
-        errorHandler: notify.onError({
-          title: "SASS/SCSS",
-          message: "Styles Error <%= error.message %>",
-          sound: false,
-        }),
-      }),
-    )
+    .pipe(plumber(notificationConfig("SASS")))
     .pipe(sourceMaps.init())
     .pipe(sass().on("error", sass.logError))
     .pipe(sourceMaps.write())
