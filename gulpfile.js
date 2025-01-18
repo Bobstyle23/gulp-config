@@ -9,6 +9,7 @@ const plumber = require("gulp-plumber");
 const notify = require("gulp-notify");
 const webpack = require("webpack-stream");
 const babel = require("gulp-babel");
+const imageMin = require("gulp-imagemin");
 
 const notificationConfig = (title) => {
   return {
@@ -47,7 +48,10 @@ gulp.task("sass", () => {
 
 // NOTE: copy images to dist
 gulp.task("images", () => {
-  return gulp.src("./src/img/**/*").pipe(gulp.dest("./dist/img/"));
+  return gulp
+    .src("./src/img/**/*")
+    .pipe(imageMin({ verbose: true }))
+    .pipe(gulp.dest("./dist/img/"));
 });
 
 // NOTE: copy fonts to dist
