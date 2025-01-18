@@ -1,0 +1,23 @@
+.main {
+  max-width: 144rem;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 0.4rem;
+  padding: 1.4rem 0;
+  box-shadow: $box-shadow-mobile;
+}
+
+@include respond-to($breakpoint-tablets) {
+  .main {
+    padding: 0.8rem 0;
+    box-shadow: $box-shadow-tablet;
+    border-radius: 0.6rem;
+  }
+}
+
+@include respond-to($breakpoint-desktops) {
+  .main {
+    padding: 0.9rem 0;
+    box-shadow: $box-shadow-desktop;
+  }
+}

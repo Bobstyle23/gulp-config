@@ -1,0 +1,102 @@
+.hero {
+  @extend %grid;
+  row-gap: 4.8rem;
+  padding: 4.8rem 1.6rem;
+
+  &__title {
+    @extend %text-4xl;
+    @extend %font-weight-semibold;
+    color: map-get($text-colors, primary);
+    margin-bottom: 3.2rem;
+  }
+
+  &__features {
+    @extend %flexbox;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 3.2rem;
+
+    &--item {
+      @extend %text-lg;
+      @extend %flexbox;
+      flex-direction: row;
+      gap: 1.2rem;
+      color: map-get($map: $text-colors, $key: secondary);
+
+      img {
+        display: inline-block;
+        width: 2.4rem;
+        height: 2.4rem;
+      }
+    }
+  }
+
+  &__cta {
+    @extend %grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 1.6rem;
+  }
+
+  &__btn {
+    @extend %text-base;
+    @extend %font-weight-medium;
+    width: 100%;
+    height: 4.8rem;
+
+    &__primary {
+      color: map-get($map: $text-colors, $key: primary-invert);
+    }
+  }
+}
+
+@include respond-to($breakpoint-tablets) {
+  .hero {
+    padding: 6.4rem 1.6rem;
+    row-gap: 3.2rem;
+    justify-items: baseline;
+
+    &__title {
+      font-size: 4.8rem;
+      line-height: 1;
+      margin-bottom: 6.4rem;
+    }
+
+    &__features {
+      margin-bottom: 6.4rem;
+    }
+
+    &__cta {
+      grid-template-columns: 21.3rem 21.3rem;
+      justify-items: baseline;
+      column-gap: 3.2rem;
+    }
+
+    &__btn {
+      width: 100%;
+      height: 6rem;
+      font-size: 1.8rem;
+      line-height: 2.8rem;
+
+      &--secondary {
+        grid-column: 1;
+        grid-row: 1;
+      }
+    }
+  }
+}
+
+@include respond-to($breakpoint-desktops) {
+  .hero {
+    grid-template-columns: 48.8rem 1fr;
+    column-gap: 3.2rem;
+    padding: 9.6rem;
+
+    &__title {
+      font-size: 6rem;
+    }
+
+    &__cta {
+      grid-template-columns: 17.5rem 17.5rem;
+    }
+  }
+}

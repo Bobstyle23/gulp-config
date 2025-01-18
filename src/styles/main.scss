@@ -1,5 +1,7 @@
 @import "../../node_modules/@bobstyle23/common-styles/main.scss";
 
-@import "scss/team";
-@import "scss/features";
-@import "scss/hero";
+/* @import "scss/features-section/features"; */
+/* @import "scss/team-section/team"; */
+/* @import "scss/hero-section-bullets/hero";*/
+
+@import "scss/**/*.scss";

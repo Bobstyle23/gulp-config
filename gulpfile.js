@@ -10,6 +10,7 @@ const notify = require("gulp-notify");
 const webpack = require("webpack-stream");
 const babel = require("gulp-babel");
 const imageMin = require("gulp-imagemin");
+const sassGlob = require("gulp-sass-glob");
 
 const notificationConfig = (title) => {
   return {
@@ -38,9 +39,10 @@ gulp.task("html", () => {
 // NOTE: compile SASS
 gulp.task("sass", () => {
   return gulp
-    .src("./src/styles/*.scss")
+    .src("./src/styles/**/*.scss")
     .pipe(plumber(notificationConfig("SASS")))
     .pipe(sourceMaps.init())
+    .pipe(sassGlob())
     .pipe(sass().on("error", sass.logError))
     .pipe(sourceMaps.write())
     .pipe(gulp.dest("./dist/css/"));
@@ -49,7 +51,7 @@ gulp.task("sass", () => {
 // NOTE: copy images to dist
 gulp.task("images", () => {
   return gulp
-    .src("./src/img/**/*")
+    .src("./src/img/**/*", { encoding: false })
     .pipe(imageMin({ verbose: true }))
     .pipe(gulp.dest("./dist/img/"));
 });
