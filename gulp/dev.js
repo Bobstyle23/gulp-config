@@ -8,8 +8,6 @@ const sourceMaps = require("gulp-sourcemaps");
 const plumber = require("gulp-plumber");
 const notify = require("gulp-notify");
 const webpack = require("webpack-stream");
-const babel = require("gulp-babel");
-const imageMin = require("gulp-imagemin");
 const sassGlob = require("gulp-sass-glob");
 const changed = require("gulp-changed");
 
@@ -51,18 +49,15 @@ gulp.task("sass:dev", () => {
     .pipe(gulp.dest("./build/css/"));
 });
 
-// NOTE: copy images to dist
+// NOTE: copy images to build
 gulp.task("images:dev", () => {
-  return (
-    gulp
-      .src("./src/img/**/*", { encoding: false })
-      .pipe(changed("./build/img/"))
-      // .pipe(imageMin({ verbose: true }))
-      .pipe(gulp.dest("./build/img/"))
-  );
+  return gulp
+    .src("./src/img/**/*", { encoding: false })
+    .pipe(changed("./build/img/"))
+    .pipe(gulp.dest("./build/img/"));
 });
 
-// NOTE: copy fonts to dist
+// NOTE: copy fonts to build
 gulp.task("fonts:dev", () => {
   return gulp
     .src("./src/fonts/**/*")
@@ -70,7 +65,7 @@ gulp.task("fonts:dev", () => {
     .pipe(gulp.dest("./build/fonts/"));
 });
 
-// NOTE: copy files to dist
+// NOTE: copy files to build
 gulp.task("files:dev", () => {
   return gulp
     .src("./src/files/**/*")
@@ -80,15 +75,12 @@ gulp.task("files:dev", () => {
 
 // NOTE: js files
 gulp.task("js:dev", () => {
-  return (
-    gulp
-      .src("./src/js/*.js")
-      .pipe(changed("./build/js"))
-      .pipe(plumber(notificationConfig("JavaScript")))
-      /*     .pipe(babel()) */
-      .pipe(webpack(require("./../webpack.config.js")))
-      .pipe(gulp.dest("./build/js"))
-  );
+  return gulp
+    .src("./src/js/*.js")
+    .pipe(changed("./build/js"))
+    .pipe(plumber(notificationConfig("JavaScript")))
+    .pipe(webpack(require("./../webpack.config.js")))
+    .pipe(gulp.dest("./build/js"));
 });
 
 // NOTE: starts server
@@ -101,7 +93,7 @@ gulp.task("server:dev", () => {
   );
 });
 
-// NOTE: clean dist folder
+// NOTE: clean build folder
 gulp.task("clean:dev", (callback) => {
   if (fs.existsSync("./build/")) {
     return gulp.src("./build/", { read: false }).pipe(clean({ force: true }));
