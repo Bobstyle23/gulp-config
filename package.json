@@ -1,7 +1,9 @@
 {
-  "name": "gulp-config",
+  "name": "common-gulp-config",
   "version": "1.0.0",
   "description": "Gulp configuration my side projects",
+  "author": "MukhammadBobur Pakhriev",
+  "git": "Bobstyle23",
   "devDependencies": {
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
