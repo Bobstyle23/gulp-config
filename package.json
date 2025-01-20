@@ -10,6 +10,7 @@
     "gulp": "^5.0.0",
     "gulp-babel": "^8.0.0",
     "gulp-changed": "^5.0.2",
+    "gulp-changed-in-place": "^2.3.0",
     "gulp-clean": "^0.4.0",
     "gulp-file-include": "^2.3.0",
     "gulp-imagemin": "7",
@@ -28,5 +29,8 @@
     "presets": [
       "@babel/preset-env"
     ]
+  },
+  "dependencies": {
+    "air-datepicker": "^3.5.3"
   }
 }

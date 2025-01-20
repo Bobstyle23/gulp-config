@@ -1200,6 +1200,11 @@ after@0.8.2:
   resolved "https://registry.yarnpkg.com/after/-/after-0.8.2.tgz#fedb394f9f0e02aa9768e702bda23b505fae7e1f"
   integrity sha512-QbJ0NTQ/I9DI3uSJA4cbexiwQeRAfjPScqIbSjUDd9TOrcg6pTkdgziesOqxBMBzit8vFCTwrP27t13vFOORRA==
 
+air-datepicker@^3.5.3:
+  version "3.5.3"
+  resolved "https://registry.yarnpkg.com/air-datepicker/-/air-datepicker-3.5.3.tgz#55aa739f1ae552f145c332904aad5db4563ae980"
+  integrity sha512-Elf9gLhv/jidN1+TfeRJYMQRUfYx5apXw2dY5DuAMPRnNtQ4Iw9fTTJK772osmXSUB9xQ2Y8Q1Pt6pgBOQLPQw==
+
 ajv-formats@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/ajv-formats/-/ajv-formats-2.1.1.tgz#6e669400659eb74973bbf2e33327180a0996b520"
@@ -3507,6 +3512,13 @@ gulp-babel@^8.0.0:
     replace-ext "^1.0.0"
     through2 "^2.0.0"
     vinyl-sourcemaps-apply "^0.2.0"
+
+gulp-changed-in-place@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/gulp-changed-in-place/-/gulp-changed-in-place-2.3.0.tgz#de4150c276d8c0052451caf2f0c7d2be17e76888"
+  integrity sha512-ma8qyimsYEp/2rY0dylpbuZCoQahjA+wWamGcro1ZaXaLtbnETVRQjHGlDpesquNnMebFwINXBdJ2sVZqq9AvA==
+  dependencies:
+    through2 "^2.0.0"
 
 gulp-changed@^5.0.2:
   version "5.0.2"

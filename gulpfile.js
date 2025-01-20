@@ -25,7 +25,7 @@ const notificationConfig = (title) => {
 // NOTE: include html files into main html
 gulp.task("html", () => {
   return gulp
-    .src("./src/*.html")
+    .src(["./src/html/**/*.html", "!./src/components/*.html"])
     .pipe(plumber(notificationConfig("HTML")))
     .pipe(
       fileInclude({
