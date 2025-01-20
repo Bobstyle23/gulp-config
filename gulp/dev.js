@@ -27,7 +27,7 @@ const notificationConfig = (title) => {
 gulp.task("html:dev", () => {
   return gulp
     .src(["./src/html/**/*.html", "!./src/components/*.html"])
-    .pipe(changed("./build/"))
+    .pipe(changed("./build/", { hasChanged: changed.compareContents }))
     .pipe(plumber(notificationConfig("HTML")))
     .pipe(
       fileInclude({

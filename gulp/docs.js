@@ -17,6 +17,8 @@ const csso = require("gulp-csso");
 const htmlclean = require("gulp-htmlclean");
 const webp = require("gulp-webp");
 const autoprefixer = require("gulp-autoprefixer");
+const webpHTML = require("gulp-webp-html");
+const webpCSS = require("gulp-webp-css");
 
 const notificationConfig = (title) => {
   return {
@@ -40,6 +42,7 @@ gulp.task("html:docs", () => {
         basepath: "@file",
       }),
     )
+    .pipe(webpHTML())
     .pipe(htmlclean())
     .pipe(gulp.dest("./docs/"));
 });
@@ -53,6 +56,7 @@ gulp.task("sass:docs", () => {
     .pipe(sourceMaps.init())
     .pipe(autoprefixer())
     .pipe(sassGlob())
+    .pipe(webpCSS())
     .pipe(groupMedia())
     .pipe(sass().on("error", sass.logError))
     .pipe(csso())
