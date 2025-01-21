@@ -1,10 +1,32 @@
 {
   "name": "common-gulp-config",
-  "version": "1.0.3",
+  "version": "1.0.11",
   "description": "Gulp configuration my side projects",
   "author": "MukhammadBobur Pakhriev",
   "git": "Bobstyle23",
-  "devDependencies": {
+  "scripts": {
+    "postinstall": "node install.js"
+  },
+  "files": [
+    "build",
+    "docs",
+    "gulp",
+    "src",
+    "install.js",
+    "gulpfile.js",
+    "webpack.config.js"
+  ],
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "browserslist": [
+    "last 5 versions"
+  ],
+  "dependencies": {
+    "fs-extra": "^11.3.0",
+    "gulp-group-css-media-queries": "^1.2.2",
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
     "@bobstyle23/common-styles": "^1.0.15",
@@ -33,16 +55,5 @@
     "style-loader": "^4.0.0",
     "webpack": "^5.97.1",
     "webpack-stream": "^7.0.0"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ]
-  },
-  "browserslist": [
-    "last 5 versions"
-  ],
-  "dependencies": {
-    "gulp-group-css-media-queries": "^1.2.2"
   }
 }
