@@ -1,11 +1,11 @@
 {
   "name": "common-gulp-config",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Gulp configuration my side projects",
   "author": "MukhammadBobur Pakhriev",
   "git": "Bobstyle23",
   "scripts": {
-    "postinstall": "node ./node_modules/common-gulp-config/install.js"
+    "postinstall": "node node_modules/common-gulp-config/install.js"
   },
   "files": [
     "build",
