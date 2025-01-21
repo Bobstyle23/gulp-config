@@ -69,11 +69,6 @@ gulp.task("images:docs", () => {
   return gulp
     .src("./src/img/**/*", { encoding: false })
     .pipe(changed("./docs/img/"))
-    .pipe(webp())
-    .pipe(gulp.dest("./docs/img/"))
-
-    .pipe(gulp.src("./src/img/**/*"))
-    .pipe(changed("./docs/img/"))
     .pipe(imageMin({ verbose: true }))
     .pipe(gulp.dest("./docs/img/"));
 });
