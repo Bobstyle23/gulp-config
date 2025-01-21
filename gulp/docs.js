@@ -42,7 +42,6 @@ gulp.task("html:docs", () => {
         basepath: "@file",
       }),
     )
-    .pipe(webpHTML())
     .pipe(htmlclean())
     .pipe(gulp.dest("./docs/"));
 });
