@@ -1,6 +1,6 @@
 {
   "name": "common-gulp-config",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "Gulp configuration my side projects",
   "author": "MukhammadBobur Pakhriev",
   "git": "Bobstyle23",
@@ -9,6 +9,7 @@
   },
   "files": [
     "build",
+    "components",
     "docs",
     "gulp",
     "src",
