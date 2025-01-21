@@ -5,7 +5,7 @@ NPM package for projects to help build with ease to save time by writing less co
 ## Installation
 
 ```bash
-npm install @bobstyle23/common-styles
+npm install common-gulp-config
 ```
 
 ## Usage
