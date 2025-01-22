@@ -25,7 +25,7 @@ const notificationConfig = (title) => {
 gulp.task("html:dev", () => {
   return gulp
     .src(["./src/html/**/*.html", "!./src/components/*.html"])
-    .pipe(changed("./build/", { hasChanged: changed.compareContents }))
+    .pipe(changed("./build/html/", { hasChanged: changed.compareContents }))
     .pipe(plumber(notificationConfig("HTML")))
     .pipe(
       fileInclude({
@@ -33,7 +33,14 @@ gulp.task("html:dev", () => {
         basepath: "@file",
       }),
     )
-    .pipe(gulp.dest("./build/"));
+    .pipe(
+      gulp.dest((file) => {
+        if (file.basename === "index.html") {
+          return "./build/";
+        }
+        return "./build/html/";
+      }),
+    );
 });
 
 // NOTE: compile SASS

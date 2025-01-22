@@ -34,7 +34,7 @@ const notificationConfig = (title) => {
 gulp.task("html:docs", () => {
   return gulp
     .src(["./src/html/**/*.html", "!./src/components/*.html"])
-    .pipe(changed("./docs/"))
+    .pipe(changed("./docs/html/"))
     .pipe(plumber(notificationConfig("HTML")))
     .pipe(
       fileInclude({
@@ -43,7 +43,15 @@ gulp.task("html:docs", () => {
       }),
     )
     .pipe(htmlclean())
-    .pipe(gulp.dest("./docs/"));
+    .pipe(
+      gulp.dest((file) => {
+        if (file.basename === "index.html") {
+          return "./docs/";
+        }
+        return "./docs/html/";
+      }),
+    )
+    .pipe(gulp.dest("./docs/html/"));
 });
 
 // NOTE: compile SASS
