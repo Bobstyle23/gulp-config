@@ -10,6 +10,7 @@ const notify = require("gulp-notify");
 const webpack = require("webpack-stream");
 const sassGlob = require("gulp-sass-glob");
 const changed = require("gulp-changed");
+const replace = require("gulp-replace");
 
 const notificationConfig = (title) => {
   return {

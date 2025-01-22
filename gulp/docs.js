@@ -15,10 +15,9 @@ const groupMedia = require("gulp-group-css-media-queries");
 const changed = require("gulp-changed");
 const csso = require("gulp-csso");
 const htmlclean = require("gulp-htmlclean");
-const webp = require("gulp-webp");
 const autoprefixer = require("gulp-autoprefixer");
-const webpHTML = require("gulp-webp-html");
 const webpCSS = require("gulp-webp-css");
+const replace = require("gulp-replace");
 
 const notificationConfig = (title) => {
   return {
