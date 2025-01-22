@@ -50,8 +50,7 @@ gulp.task("html:docs", () => {
         }
         return "./docs/html/";
       }),
-    )
-    .pipe(gulp.dest("./docs/html/"));
+    );
 });
 
 // NOTE: compile SASS
