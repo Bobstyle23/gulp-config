@@ -31,40 +31,25 @@ const notificationConfig = (title) => {
 
 // NOTE: include html files into main html
 gulp.task("html:docs", () => {
-  return (
-    gulp
-      .src(["./src/html/**/*.html", "!./src/components/*.html"])
-      .pipe(changed("./docs/html/"))
-      .pipe(plumber(notificationConfig("HTML")))
-      .pipe(
-        fileInclude({
-          prefix: "@@",
-          basepath: "@file",
-        }),
-      )
-      .pipe(
-        replace(
-          /(?<=src=|href=|srcset=)(['"])(\.(\.)?\/)*(img|images|fonts|css|scss|sass|js|files|audio|video)(\/[^\/'"]*(\/)?)?([^'"]*)\1/gi,
-          "$1$2$4$5$7$1",
-        ),
-      )
-      // FIX: won't work with 2 depth folder structure
-      // .pipe(
-      //   replace(
-      //     /(?<=src=|href=|srcset=)(['"])(\.(\.)?\/)*(img|images|fonts|css|scss|sass|js|files|audio|video)(\/[^\/'"]+(\/))?([^'"]*)\1/gi,
-      //     "$1./$4$5$7$1",
-      //   ),
-      // )
-      .pipe(htmlclean())
-      .pipe(
-        gulp.dest((file) => {
-          if (file.basename === "index.html") {
-            return "./docs/";
-          }
-          return "./docs/html/";
-        }),
-      )
-  );
+  return gulp
+    .src(["./src/html/**/*.html", "!./src/components/*.html"])
+    .pipe(changed("./docs/html/"))
+    .pipe(plumber(notificationConfig("HTML")))
+    .pipe(
+      fileInclude({
+        prefix: "@@",
+        basepath: "@file",
+      }),
+    )
+
+    .pipe(
+      replace(
+        /(?<=src=|href=|srcset=)(['"])(\.(\.)?\/)*(img|images|fonts|css|scss|sass|js|files|audio|video)(\/[^\/'"]+(\/))?([^'"]*)\1/gi,
+        "$1./$4$5$7$1",
+      ),
+    )
+    .pipe(htmlclean())
+    .pipe(gulp.dest("./docs/"));
 });
 
 // NOTE: compile SASS
