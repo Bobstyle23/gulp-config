@@ -19,6 +19,8 @@ const autoprefixer = require("gulp-autoprefixer");
 const webpCSS = require("gulp-webp-css");
 const replace = require("gulp-replace");
 const typograf = require("gulp-typograf");
+const svgsprite = require("gulp-svg-sprite");
+const { svgStack, svgStack } = require("../utilities.js");
 
 const notificationConfig = (title) => {
   return {
@@ -93,6 +95,24 @@ gulp.task("images:docs", () => {
     .pipe(changed("./docs/img/"))
     .pipe(imageMin({ verbose: true }))
     .pipe(gulp.dest("./docs/img/"));
+});
+
+// NOTE: svg stack
+gulp.task("svgStack:docs", function () {
+  return gulp
+    .src("./src/img/svgicons/**/*.svg")
+    .pipe(plumber(plumberNotify("SVG:dev")))
+    .pipe(svgsprite(svgStack))
+    .pipe(gulp.dest("./docs/img/svgsprite/"));
+});
+
+// NOTE: svg symbol
+gulp.task("svgSymbol:docs", function () {
+  return gulp
+    .src("./src/img/svgicons/**/*.svg")
+    .pipe(plumber(plumberNotify("SVG:dev")))
+    .pipe(svgsprite(svgSymbol))
+    .pipe(gulp.dest("./docs/img/svgsprite/"));
 });
 
 // NOTE: copy fonts to docs

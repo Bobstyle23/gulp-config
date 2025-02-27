@@ -13,6 +13,7 @@ const changed = require("gulp-changed");
 const replace = require("gulp-replace");
 const typograf = require("gulp-typograf");
 const svgSprite = require("gulp-svg-sprite");
+const { svgStack, svgSymbol } = require("../utilities.js");
 
 const notificationConfig = (title) => {
   return {
@@ -24,49 +25,7 @@ const notificationConfig = (title) => {
   };
 };
 
-// NOTE: svg sprite config
-const svgStack = {
-  mode: {
-    stack: {
-      example: true,
-    },
-  },
-  shape: {
-    transform: [
-      {
-        svgo: {
-          js2svg: { indent: 4, pretty: true },
-        },
-      },
-    ],
-  },
-};
-
-const svgSymbol = {
-  mode: {
-    symbol: {
-      sprite: "../sprite.symbol.svg",
-    },
-  },
-  shape: {
-    transform: [
-      {
-        svgo: {
-          js2svg: { indent: 4, pretty: true },
-          plugins: [
-            {
-              name: "removeAttrs",
-              params: {
-                attrs: "(fill|stroke)",
-              },
-            },
-          ],
-        },
-      },
-    ],
-  },
-};
-
+// NOTE: svg symbol
 gulp.task("svgStack:dev", function () {
   return gulp
     .src("./src/img/svgicons/**/*.svg")
@@ -75,6 +34,7 @@ gulp.task("svgStack:dev", function () {
     .pipe(gulp.dest("./build/img/svgsprite/"));
 });
 
+// NOTE: svg symbol
 gulp.task("svgSymbol:dev", function () {
   return gulp
     .src("./src/img/svgicons/**/*.svg")
