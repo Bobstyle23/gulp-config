@@ -1,6 +1,6 @@
 {
   "name": "common-gulp-config",
-  "version": "1.0.30",
+  "version": "1.0.31",
   "description": "Gulp configuration my side projects",
   "author": "MukhammadBobur Pakhriev",
   "git": "Bobstyle23",
@@ -12,7 +12,8 @@
     "src",
     "install.js",
     "gulpfile.js",
-    "webpack.config.js"
+    "webpack.config.js",
+    "utilities.js"
   ],
   "babel": {
     "presets": [
@@ -51,7 +52,6 @@
     "gulp-svg-sprite": "^2.0.3",
     "gulp-typograf": "^4.1.0",
     "gulp-webp": "^4.0.1",
-    "gulp-webp-css": "^1.1.0",
     "gulp-webp-html": "^1.0.2",
     "gulp-webp-retina-html": "^1.2.0",
     "imagemin-webp": "^8.0.0",
