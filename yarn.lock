@@ -3788,6 +3788,16 @@ gulp-sourcemaps@^3.0.0:
     strip-bom-string "^1.0.0"
     through2 "^2.0.0"
 
+gulp-typograf@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/gulp-typograf/-/gulp-typograf-4.1.0.tgz#803326564145ac7112eab553f39719496223a87b"
+  integrity sha512-LvxSji4nJNywSUY5Hg+5XbA7E0E2msGeXLDGGvMByCkmhukr8jvL4miWFd84YS2iC8jjXMjox6NE0vR3TXC17Q==
+  dependencies:
+    plugin-error "^2.0.1"
+    through2 "^3.0.1"
+    typograf "^7.0.0"
+    vinyl "^3.0.0"
+
 gulp-util@^3.0.7:
   version "3.0.8"
   resolved "https://registry.yarnpkg.com/gulp-util/-/gulp-util-3.0.8.tgz#0054e1e744502e27c04c187c3ecc505dd54bbb4f"
@@ -6944,6 +6954,11 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==
+
+typograf@^7.0.0:
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/typograf/-/typograf-7.4.1.tgz#fa274b9dc39ab0f107e00af366e0d2e88bb65b08"
+  integrity sha512-V+1jqkv574pzPTW/JcqkhXQzmA7U3B2xVKc6QMzNxmN+1eecVn164Z8Wm8xM6ArKSk/sUjKvOPoT0U3G6zOMjQ==
 
 ultron@1.0.x:
   version "1.0.2"

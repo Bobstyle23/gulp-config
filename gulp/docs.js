@@ -18,6 +18,7 @@ const htmlclean = require("gulp-htmlclean");
 const autoprefixer = require("gulp-autoprefixer");
 const webpCSS = require("gulp-webp-css");
 const replace = require("gulp-replace");
+const typograf = require("gulp-typograf");
 
 const notificationConfig = (title) => {
   return {
@@ -47,6 +48,16 @@ gulp.task("html:docs", () => {
         /(?<=src=|href=|srcset=)(['"])(\.(\.)?\/)*(img|images|fonts|css|scss|sass|js|files|audio|video)(\/[^\/'"]+(\/))?([^'"]*)\1/gi,
         "$1./$4$5$7$1",
       ),
+    )
+    .pipe(
+      typograf({
+        locale: ["en", "en-US"],
+        htmlEntity: { type: "digit" },
+        safeTags: [
+          ["<\\?php", "\\?>"],
+          ["<no-typography>", "</no-typography>"],
+        ],
+      }),
     )
     .pipe(htmlclean())
     .pipe(gulp.dest("./docs/"));
