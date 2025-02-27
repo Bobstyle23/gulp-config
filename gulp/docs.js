@@ -9,7 +9,7 @@ const plumber = require("gulp-plumber");
 const notify = require("gulp-notify");
 const webpack = require("webpack-stream");
 const babel = require("gulp-babel");
-const imageMin = require("gulp-imagemin");
+const imagemin = require("gulp-imagemin");
 const sassGlob = require("gulp-sass-glob");
 const groupMedia = require("gulp-group-css-media-queries");
 const changed = require("gulp-changed");
@@ -20,6 +20,8 @@ const replace = require("gulp-replace");
 const typograf = require("gulp-typograf");
 const svgSprite = require("gulp-svg-sprite");
 const webpHTML = require("gulp-webp-retina-html");
+const extReplace = require("gulp-ext-replace");
+const imageminWebp = require("imagemin-webp");
 const { svgStack, svgStack, notificationConfig } = require("../utilities.js");
 
 // NOTE: include html files into main html
@@ -93,7 +95,27 @@ gulp.task("images:docs", () => {
   return gulp
     .src("./src/img/**/*", "!./src/img/svgicons/**/*", { encoding: false })
     .pipe(changed("./docs/img/"))
-    .pipe(imageMin({ verbose: true }))
+    .pipe(
+      imagemin([
+        imageminWebp({
+          quality: 85,
+        }),
+      ]),
+    )
+    .pipe(extReplace(".webp"))
+    .pipe(gulp.dest("./docs/img/"))
+    .pipe(gulp.src("./src/img/**/*"))
+    .pipe(changed("./docs/img/"))
+    .pipe(
+      imagemin(
+        [
+          imagemin.gifsicle({ interlaced: true }),
+          imagemin.mozjpeg({ quality: 85, progressive: true }),
+          imagemin.optipng({ optimizationLevel: 5 }),
+        ],
+        { verbose: true },
+      ),
+    )
     .pipe(gulp.dest("./docs/img/"));
 });
 
