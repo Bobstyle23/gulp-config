@@ -4068,6 +4068,14 @@ gulp-webp-html@^1.0.2:
     gulp-util "^3.0.7"
     through2 "^2.0.1"
 
+gulp-webp-retina-html@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/gulp-webp-retina-html/-/gulp-webp-retina-html-1.2.0.tgz#d629574889f5bc405460514ecb702bd8c72e3987"
+  integrity sha512-3uDa3xn1tFm8nlrqvBdEwcT290DqIcam3W4czAFYhBCGTChqYUQ+u5xThfermY8QdV8kUZa+fBhPry1Lkx2w+g==
+  dependencies:
+    plugin-error "^1.0.1"
+    through2 "^3.0.1"
+
 gulp-webp@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/gulp-webp/-/gulp-webp-4.0.1.tgz#c3cf0ee8362fced253784c50bc29a44a06d98ed1"

@@ -16,21 +16,11 @@ const changed = require("gulp-changed");
 const csso = require("gulp-csso");
 const htmlclean = require("gulp-htmlclean");
 const autoprefixer = require("gulp-autoprefixer");
-const webpCSS = require("gulp-webp-css");
 const replace = require("gulp-replace");
 const typograf = require("gulp-typograf");
-const svgsprite = require("gulp-svg-sprite");
-const { svgStack, svgStack } = require("../utilities.js");
-
-const notificationConfig = (title) => {
-  return {
-    errorHandler: notify.onError({
-      title: `${title}`,
-      message: `error <%= error.message %>`,
-      sound: false,
-    }),
-  };
-};
+const svgSprite = require("gulp-svg-sprite");
+const webpHTML = require("gulp-webp-retina-html");
+const { svgStack, svgStack, notificationConfig } = require("../utilities.js");
 
 // NOTE: include html files into main html
 gulp.task("html:docs", () => {
@@ -61,6 +51,17 @@ gulp.task("html:docs", () => {
         ],
       }),
     )
+    .pipe(
+      webpHTML({
+        extensions: ["jpg", "jpeg", "png", "gif", "webp"],
+        retina: {
+          1: "",
+          2: "@2x",
+          3: "@3x",
+          4: "@4x",
+        },
+      }),
+    )
     .pipe(htmlclean())
     .pipe(gulp.dest("./docs/"));
 });
@@ -80,7 +81,6 @@ gulp.task("sass:docs", () => {
         "$1$2$3$4$6$1",
       ),
     )
-    .pipe(webpCSS())
     .pipe(groupMedia())
     .pipe(sass().on("error", sass.logError))
     .pipe(csso())
@@ -91,7 +91,7 @@ gulp.task("sass:docs", () => {
 // NOTE: copy images to docs
 gulp.task("images:docs", () => {
   return gulp
-    .src("./src/img/**/*", { encoding: false })
+    .src("./src/img/**/*", "!./src/img/svgicons/**/*", { encoding: false })
     .pipe(changed("./docs/img/"))
     .pipe(imageMin({ verbose: true }))
     .pipe(gulp.dest("./docs/img/"));
@@ -102,7 +102,7 @@ gulp.task("svgStack:docs", function () {
   return gulp
     .src("./src/img/svgicons/**/*.svg")
     .pipe(plumber(plumberNotify("SVG:dev")))
-    .pipe(svgsprite(svgStack))
+    .pipe(svgSprite(svgStack))
     .pipe(gulp.dest("./docs/img/svgsprite/"));
 });
 

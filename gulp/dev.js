@@ -13,17 +13,8 @@ const changed = require("gulp-changed");
 const replace = require("gulp-replace");
 const typograf = require("gulp-typograf");
 const svgSprite = require("gulp-svg-sprite");
-const { svgStack, svgSymbol } = require("../utilities.js");
-
-const notificationConfig = (title) => {
-  return {
-    errorHandler: notify.onError({
-      title: `${title}`,
-      message: `error <%= error.message %>`,
-      sound: false,
-    }),
-  };
-};
+const webpHTML = require("gulp-webp-retina-html");
+const { svgStack, svgSymbol, notificationConfig } = require("../utilities.js");
 
 // NOTE: svg symbol
 gulp.task("svgStack:dev", function () {
@@ -39,7 +30,7 @@ gulp.task("svgSymbol:dev", function () {
   return gulp
     .src("./src/img/svgicons/**/*.svg")
     .pipe(plumber(plumberNotify("SVG:dev")))
-    .pipe(svgsprite(svgSymbol))
+    .pipe(svgSprite(svgSymbol))
     .pipe(gulp.dest("./build/img/svgsprite/"));
 });
 
@@ -73,6 +64,17 @@ gulp.task("html:dev", () => {
         ],
       }),
     )
+    .pipe(
+      webpHTML({
+        extensions: ["jpg", "jpeg", "png", "gif", "webp"],
+        retina: {
+          1: "",
+          2: "@2x",
+          3: "@3x",
+          4: "@4x",
+        },
+      }),
+    )
     .pipe(gulp.dest("./build/"));
 });
 
@@ -98,7 +100,7 @@ gulp.task("sass:dev", () => {
 // NOTE: copy images to build
 gulp.task("images:dev", () => {
   return gulp
-    .src("./src/img/**/*", { encoding: false })
+    .src("./src/img/**/*", "!./src/img/svgicons/**/*", { encoding: false })
     .pipe(changed("./build/img/"))
     .pipe(gulp.dest("./build/img/"));
 });
