@@ -17,6 +17,10 @@ const directories = [
     src: path.join(__dirname, "webpack.config.js"),
     dest: path.join(process.cwd(), "webpack.config.js"),
   },
+  {
+    src: path.join(__dirname, "utilities.js"),
+    dest: path.join(process.cwd(), "utilities.js"),
+  },
 ];
 
 async function compareAndCopy(src, dest) {
