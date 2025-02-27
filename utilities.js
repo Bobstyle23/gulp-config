@@ -30,14 +30,4 @@ const svgSymbol = {
   },
 };
 
-const notificationConfig = (title) => {
-  return {
-    errorHandler: notify.onError({
-      title: `${title}`,
-      message: `error <%= error.message %>`,
-      sound: false,
-    }),
-  };
-};
-
-export { svgSymbol, svgStack, notificationConfig };
+export { svgSymbol, svgStack };

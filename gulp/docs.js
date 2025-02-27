@@ -22,7 +22,17 @@ const svgSprite = require("gulp-svg-sprite");
 const webpHTML = require("gulp-webp-retina-html");
 const extReplace = require("gulp-ext-replace");
 const imageminWebp = require("imagemin-webp");
-const { svgStack, svgStack, notificationConfig } = require("../utilities.js");
+const { svgSymbol, svgStack } = require("../utilities.js");
+
+const notificationConfig = (title) => {
+  return {
+    errorHandler: notify.onError({
+      title: `${title}`,
+      message: `error <%= error.message %>`,
+      sound: false,
+    }),
+  };
+};
 
 // NOTE: include html files into main html
 gulp.task("html:docs", () => {
@@ -45,7 +55,7 @@ gulp.task("html:docs", () => {
     )
     .pipe(
       typograf({
-        locale: ["en", "en-US"],
+        locale: ["ru", "en-US"],
         htmlEntity: { type: "digit" },
         safeTags: [
           ["<\\?php", "\\?>"],
@@ -91,9 +101,10 @@ gulp.task("sass:docs", () => {
 });
 
 // NOTE: copy images to docs
-gulp.task("images:docs", () => {
+
+gulp.task("images:docs", function () {
   return gulp
-    .src("./src/img/**/*", "!./src/img/svgicons/**/*", { encoding: false })
+    .src(["./src/img/**/*", "!./src/img/svgicons/**/*"], { encoding: false })
     .pipe(changed("./docs/img/"))
     .pipe(
       imagemin([
@@ -119,6 +130,24 @@ gulp.task("images:docs", () => {
     .pipe(gulp.dest("./docs/img/"));
 });
 
+// gulp.task("images:docs", () => {
+//   return gulp
+//     .src("./src/img/**/*", "!./src/img/svgicons/**/*", { encoding: false })
+//     .pipe(changed("./docs/img/"))
+//     .pipe(
+//       imagemin([
+//         imageminWebp({
+//           quality: 85,
+//         }),
+//       ]),
+//     )
+//     .pipe(extReplace(".webp"))
+//     .pipe(gulp.dest("./docs/img/"))
+//     .pipe(gulp.src("./src/img/**/*"))
+//     .pipe(changed("./docs/img/"))
+//     .pipe(gulp.dest("./docs/img/"));
+// });
+
 // NOTE: svg stack
 gulp.task("svgStack:docs", function () {
   return gulp
@@ -133,7 +162,7 @@ gulp.task("svgSymbol:docs", function () {
   return gulp
     .src("./src/img/svgicons/**/*.svg")
     .pipe(plumber(plumberNotify("SVG:dev")))
-    .pipe(svgsprite(svgSymbol))
+    .pipe(svgSprite(svgSymbol))
     .pipe(gulp.dest("./docs/img/svgsprite/"));
 });
 
