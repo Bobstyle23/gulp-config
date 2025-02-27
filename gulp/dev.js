@@ -12,6 +12,7 @@ const sassGlob = require("gulp-sass-glob");
 const changed = require("gulp-changed");
 const replace = require("gulp-replace");
 const typograf = require("gulp-typograf");
+const svgSprite = require("gulp-svg-sprite");
 
 const notificationConfig = (title) => {
   return {
@@ -22,6 +23,65 @@ const notificationConfig = (title) => {
     }),
   };
 };
+
+// NOTE: svg sprite config
+const svgStack = {
+  mode: {
+    stack: {
+      example: true,
+    },
+  },
+  shape: {
+    transform: [
+      {
+        svgo: {
+          js2svg: { indent: 4, pretty: true },
+        },
+      },
+    ],
+  },
+};
+
+const svgSymbol = {
+  mode: {
+    symbol: {
+      sprite: "../sprite.symbol.svg",
+    },
+  },
+  shape: {
+    transform: [
+      {
+        svgo: {
+          js2svg: { indent: 4, pretty: true },
+          plugins: [
+            {
+              name: "removeAttrs",
+              params: {
+                attrs: "(fill|stroke)",
+              },
+            },
+          ],
+        },
+      },
+    ],
+  },
+};
+
+gulp.task("svgStack:dev", function () {
+  return gulp
+    .src("./src/img/svgicons/**/*.svg")
+    .pipe(plumber(plumberNotify("SVG:dev")))
+    .pipe(svgsprite(svgStack))
+    .pipe(gulp.dest("./build/img/svgsprite/"));
+});
+
+gulp.task("svgSymbol:dev", function () {
+  return gulp
+    .src("./src/img/svgicons/**/*.svg")
+    .pipe(plumber(plumberNotify("SVG:dev")))
+    .pipe(svgsprite(svgSymbol))
+    .pipe(gulp.dest("./build/img/svgsprite/"));
+});
 
 // NOTE: include html files into main html
 gulp.task("html:dev", () => {
@@ -135,4 +195,8 @@ gulp.task("watch:dev", () => {
   gulp.watch("./src/fonts/**/*", gulp.parallel("fonts:dev"));
   gulp.watch("./src/files/**/*", gulp.parallel("files:dev"));
   gulp.watch("./src/js/**/*.js", gulp.parallel("js:dev"));
+  gulp.watch(
+    "./src/img/svgicons/*",
+    gulp.series("svgStack:dev", "svgSymbol:dev"),
+  );
 });
