@@ -124,7 +124,7 @@ gulp.task("images:dev", () => {
     .pipe(extReplace(".webp"))
     .pipe(gulp.dest("./build/img/"))
     .pipe(gulp.src("./src/img/**/*"))
-    .pipe(changed("./docs/img/"))
+    .pipe(changed("./build/img/"))
     .pipe(
       imagemin(
         [
