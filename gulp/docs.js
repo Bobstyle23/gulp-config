@@ -152,7 +152,7 @@ gulp.task("images:docs", function () {
 gulp.task("svgStack:docs", function () {
   return gulp
     .src("./src/img/svgicons/**/*.svg")
-    .pipe(plumber(plumberNotify("SVG:dev")))
+    .pipe(plumber(notificationConfig("SVG:dev")))
     .pipe(svgSprite(svgStack))
     .pipe(gulp.dest("./docs/img/svgsprite/"));
 });
@@ -161,7 +161,7 @@ gulp.task("svgStack:docs", function () {
 gulp.task("svgSymbol:docs", function () {
   return gulp
     .src("./src/img/svgicons/**/*.svg")
-    .pipe(plumber(plumberNotify("SVG:dev")))
+    .pipe(plumber(notificationConfig("SVG:dev")))
     .pipe(svgSprite(svgSymbol))
     .pipe(gulp.dest("./docs/img/svgsprite/"));
 });
