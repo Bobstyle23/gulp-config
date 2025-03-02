@@ -112,31 +112,33 @@ gulp.task("sass:dev", () => {
 
 // NOTE: copy images to build
 gulp.task("images:dev", () => {
-  return gulp
-    .src(["./src/img/**/*", "!./src/img/svgicons/**/*"], { encoding: false })
-    .pipe(
-      imagemin([
-        imageminWebp({
-          quality: 85,
-        }),
-      ]),
-    )
-    .pipe(extReplace(".webp"))
-    .pipe(gulp.dest("./build/img/"))
-    .pipe(gulp.src("./src/img/**/*"))
-    .pipe(changed("./build/img/"))
-    .pipe(
-      imagemin(
-        [
-          imagemin.gifsicle({ interlaced: true }),
-          imagemin.mozjpeg({ quality: 85, progressive: true }),
-          imagemin.optipng({ optimizationLevel: 5 }),
-        ],
-        { verbose: true },
-      ),
-    )
-    .pipe(changed("./build/img/"))
-    .pipe(gulp.dest("./build/img/"));
+  return (
+    gulp
+      .src(["./src/img/**/*", "!./src/img/svgicons/**/*"], { encoding: false })
+      // .pipe(
+      //   imagemin([
+      //     imageminWebp({
+      //       quality: 85,
+      //     }),
+      //   ]),
+      // )
+      .pipe(extReplace(".webp"))
+      .pipe(gulp.dest("./build/img/"))
+      .pipe(gulp.src("./src/img/**/*"))
+      .pipe(changed("./build/img/"))
+      // .pipe(
+      //   imagemin(
+      //     [
+      //       imagemin.gifsicle({ interlaced: true }),
+      //       imagemin.mozjpeg({ quality: 85, progressive: true }),
+      //       imagemin.optipng({ optimizationLevel: 5 }),
+      //     ],
+      //     { verbose: true },
+      //   ),
+      // )
+      // .pipe(changed("./build/img/"))
+      .pipe(gulp.dest("./build/img/"))
+  );
 });
 
 // NOTE: copy fonts to build
