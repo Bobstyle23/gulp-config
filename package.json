@@ -1,6 +1,6 @@
 {
   "name": "common-gulp-config",
-  "version": "1.0.40",
+  "version": "1.1.0",
   "description": "Gulp configuration my side projects",
   "author": "MukhammadBobur Pakhriev",
   "git": "Bobstyle23",
@@ -27,6 +27,7 @@
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
     "@bobstyle23/common-styles": "^1.0.15",
+    "common-sass-config": "^1.1.0",
     "css-loader": "^7.1.2",
     "diff": "^7.0.0",
     "fs-extra": "^11.3.0",
