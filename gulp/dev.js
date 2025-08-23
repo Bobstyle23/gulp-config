@@ -1,7 +1,7 @@
 const gulp = require("gulp");
 const fileInclude = require("gulp-file-include");
 const sass = require("gulp-sass")(require("sass"));
-const serverReload = require("gulp-server-livereload");
+const serverReload = require("browser-sync").create();
 const clean = require("gulp-clean");
 const fs = require("fs");
 const sourceMaps = require("gulp-sourcemaps");
@@ -168,13 +168,16 @@ gulp.task("js:dev", () => {
 });
 
 // NOTE: starts server
-gulp.task("server:dev", () => {
-  return gulp.src("./build/").pipe(
-    serverReload({
-      livereload: true,
-      open: true,
-    }),
-  );
+gulp.task("server:dev", (done) => {
+  serverReload.init({
+    server: {
+      baseDir: "./build",
+    },
+    port: 8000,
+    open: true,
+    notify: false,
+  });
+  done();
 });
 
 // NOTE: clean build folder
@@ -187,6 +190,7 @@ gulp.task("clean:dev", (callback) => {
 
 // NOTE: watch files
 gulp.task("watch:dev", () => {
+  gulp.watch("build/**/*").on("change", serverReload.reload);
   gulp.watch("./src/styles/**/*.scss", gulp.parallel("sass:dev"));
   gulp.watch("./src/**/*.html", gulp.parallel("html:dev"));
   gulp.watch("./src/img/**/*", gulp.parallel("images:dev"));
