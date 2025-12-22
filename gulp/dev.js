@@ -160,9 +160,9 @@ gulp.task("files:dev", () => {
 // NOTE: js files
 gulp.task("js:dev", () => {
   return gulp
-    .src("./src/js/*.js")
+    .src("./src/js/*.{js,ts}")
     .pipe(changed("./build/js"))
-    .pipe(plumber(notificationConfig("JavaScript")))
+    .pipe(plumber(notificationConfig("JavaScript / TypeScript")))
     .pipe(webpack(require("./../webpack.config.js")))
     .pipe(gulp.dest("./build/js"));
 });
@@ -196,7 +196,7 @@ gulp.task("watch:dev", () => {
   gulp.watch("./src/img/**/*", gulp.parallel("images:dev"));
   gulp.watch("./src/fonts/**/*", gulp.parallel("fonts:dev"));
   gulp.watch("./src/files/**/*", gulp.parallel("files:dev"));
-  gulp.watch("./src/js/**/*.js", gulp.parallel("js:dev"));
+  gulp.watch("./src/js/**/*.{js,ts}", gulp.parallel("js:dev"));
   gulp.watch(
     "./src/img/svgicons/*",
     gulp.series("svgStack:dev", "svgSymbol:dev"),

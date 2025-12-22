@@ -8,8 +8,8 @@ const generateEntryPoints = () => {
   const entry = {};
 
   files.forEach((file) => {
-    if (file.endsWith("js")) {
-      const name = path.basename(file, ".js");
+    if (file.endsWith(".js") || file.endsWith(".ts")) {
+      const name = path.basename(file, path.extname(file));
       entry[name] = path.join(jsDir, file);
     }
   });
@@ -30,8 +30,18 @@ const config = {
     filename: "[name].bundle.js",
   },
 
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
+
   module: {
     rules: [
+      {
+        test: /\.ts$/,
+        use: "ts-loader",
+        exclude: /node_modules/,
+      },
+
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],

@@ -186,9 +186,9 @@ gulp.task("files:docs", () => {
 // NOTE: js files
 gulp.task("js:docs", () => {
   return gulp
-    .src("./src/js/*.js")
+    .src("./src/js/*.{js,ts}")
     .pipe(changed("./docs/js"))
-    .pipe(plumber(notificationConfig("JavaScript")))
+    .pipe(plumber(notificationConfig("JavaScript / TypeScript")))
     .pipe(babel())
     .pipe(webpack(require("./../webpack.config.js")))
     .pipe(gulp.dest("./docs/js"));
